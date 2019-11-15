@@ -39,6 +39,14 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
                 ItemDB.AddItem(item);
             }
 
+            ViewBag.CreatedUser = string.Empty;
+            var token = Request.Cookies["token"];
+            if (token != null && !string.IsNullOrEmpty(token.Value))
+            {
+                var userName = ItemDB.Decrypt(token.Value);
+                ViewBag.CreatedUser = userName;
+            }
+
             return View(ViewBag);
         }
 
@@ -93,7 +101,7 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
         {
             if (Request.HttpMethod == "POST")
             {
-                var token = ItemDB.SignIn(Request.Form["name"], Request.Form["password"]);
+                var token = ItemDB.SignIn(Request.Form["email"], Request.Form["password"]);
                 var tokenCookie = new HttpCookie("token", token);
                 tokenCookie.Expires.AddDays(7);
                 HttpContext.Response.Cookies.Add(tokenCookie);

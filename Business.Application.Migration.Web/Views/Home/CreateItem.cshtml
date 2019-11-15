@@ -23,7 +23,7 @@
             type: 'post',
             data: itemInfo,
             success: (resp) => {
-                microsoftTeams.tasks.submitTask({success: true}, '207c4b35-3360-46ac-b5c2-af4ce2238898');
+                microsoftTeams.tasks.submitTask({ success: true }, 'c5f92b67-1887-43f4-8020-a61b5cb0a7e9');
             },
             error: (res) => {
                 alert('error occurs');
@@ -48,18 +48,12 @@
         <label for="image">Image</label>
         <input name="image" class="form-control" type="text" placeholder="Please input image link" />
     </div>
-    <input name="createdUser" type="hidden" />
+    <input name="createdUser" type="hidden" value="@ViewBag.CreatedUser" />
     <button onclick="submitForm()" class="button-primary">Submit</button>
     <br />
     <button onclick="goToChat()" class="button-primary">Chat</button>
 </div>
-<script type="text/javascript"> 
-    microsoftTeams.getContext(function (context) {
-        if (context && context.userPrincipalName) {
-            $("input[name=createdUser]").val(context.userPrincipalName);
-        }
-    });
-
+<script type="text/javascript">
     function goToChat() {
         // Just close task module without parameter;
         microsoftTeams.tasks.submitTask();

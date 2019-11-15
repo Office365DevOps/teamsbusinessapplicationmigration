@@ -2,22 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace Microsoft.Teams.Samples.TaskModule.Web
 {
     public static class ItemDB
     {
         public static List<ItemInfo> Items;
-        public static List<string> Tokens;
+        public static Dictionary<Guid, string> TokenUserNameMap;
         static ItemDB()
         {
             Items = new List<ItemInfo>();
             Items.AddRange(LoadItems());
 
-            Tokens = new List<string>();
+            TokenUserNameMap = new Dictionary<Guid, string>();
         }
 
         public static void AddItem(ItemInfo item)
@@ -81,31 +79,21 @@ namespace Microsoft.Teams.Samples.TaskModule.Web
 
         public static string SignIn(string name, string password)
         {
-            var token = Encrypt(name, password);
-            Tokens.Add(token);
-
-            return token;
-        }
-
-        public static string Encrypt(string name, string password)
-        {
-            var bytes = Encoding.Default.GetBytes($"{name}-{password}");
-            var encryptBytes = new RSACryptoServiceProvider(new CspParameters()).Encrypt(bytes, false);
-            return Convert.ToBase64String(encryptBytes);
+            var token = Guid.NewGuid();
+            TokenUserNameMap[token] = name;
+            return token.ToString();
         }
 
         public static string Decrypt(string securityTxt)
         {
-            try
+            if (Guid.TryParse(securityTxt, out var guid))
             {
-                var bytes = Convert.FromBase64String(securityTxt);
-                var DecryptBytes = new RSACryptoServiceProvider(new CspParameters()).Decrypt(bytes, false);
-                return Encoding.Default.GetString(DecryptBytes);
+                if (TokenUserNameMap.ContainsKey(guid))
+                {
+                    return TokenUserNameMap[guid];
+                }
             }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
+            return string.Empty;
         }
     }
 
