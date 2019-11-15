@@ -1,0 +1,85 @@
+﻿@using System.Configuration;
+@{
+    ViewBag.Title = "Item List";
+}
+
+    <div class="row">
+        <div class="col-md-10">
+            <button onclick="createItem()" class="button-primary" style="width:100px">
+                Create
+            </button>
+        </div>
+        <div class="col-md-1">
+            <form method="post" id="searchForm">
+                <input id="searchBox" name="searchBox" class="form-control" type="text" placeholder="keyword" style="width:100px !important;" />
+            </form>
+        </div>
+    </div>
+
+<table class="table itemList table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Link</th>
+            <th>Created User</th>
+            <th>Created Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in (List<ItemInfo>)Model)
+            {
+                <tr>
+                    <td width="100"><img src="@item.Image" /></td>
+                    <td width="200" title="@item.Name">@item.Name</td>
+                    <td width="600" title="@item.Description">@item.Description</td>
+                    <td width="150"><a href="https://book.douban.com/subject/1013208/">@item.Name</a></td>
+                    <td>@item.CreatedUser</td>
+                    <td>@item.CreatedTime.ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    let host = "@ConfigurationManager.AppSettings["Host"]";
+    let taskInfo = {
+        title: null,
+        height: null,
+        width: null,
+        url: null,
+        card: null,
+        fallbackUrl: null,
+        completionBotId: null,
+    };
+
+    taskInfo.url = host + "/CreateItem";
+    taskInfo.title = "Create an item";
+    taskInfo.height = 510;
+    taskInfo.width = 800;
+
+    function createItem() {
+        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+    }
+
+    function submitHandler(error, result) {
+        if (error && error != 'User cancelled/closed the task module.') alert(error);
+        if (result && result.success)
+            window.location.reload();
+    }
+
+    $("#searchBox").keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            var keyword = $("#searchBox").val();
+            if (keyword.length > 0) {
+                $("#searchForm").submit();
+            }
+            else
+                return false;
+        }
+    });
+</script>

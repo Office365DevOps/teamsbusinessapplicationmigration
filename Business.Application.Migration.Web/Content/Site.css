@@ -1,0 +1,27 @@
+﻿html, body, div.surface, div.panel {
+    height: 100%;
+    margin: 0;
+}
+
+div.panel {
+    padding: 15px;
+}
+
+.itemList {
+    margin-top: 10px;
+}
+
+    .itemList td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+
+img {
+    width:100px;
+}
+
+.center_div {
+    margin: 0 auto;
+    width: 80% /* value of your choice which suits your alignment */
+}

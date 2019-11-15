@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Business Application Migration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    @Styles.Render("~/Content/msteams-16.css")
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("https://statics.teams.microsoft.com/sdk/v1.5.2/js/MicrosoftTeams.min.js")
+    @Scripts.Render("~/Scripts/teamsapp.js")
+    @Scripts.Render("https://code.jquery.com/jquery-3.3.1.min.js")
+    @Scripts.Render("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js")
+    @RenderSection("scripts", required: false)
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

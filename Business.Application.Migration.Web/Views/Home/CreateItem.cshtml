@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Create item";
+}
+<h2>@ViewBag.Result</h2>
+
+<script type="text/javascript">
+    function submitForm() {
+        var itemInfo = {
+            name: $("input[name=name]").val(),
+            description: $("input[name=description]").val(),
+            link: $("input[name=link]").val(),
+            image: $("input[name=image]").val(),
+            createdUser: $("input[name=createdUser]").val(),
+        }
+        if (!itemInfo.name || !itemInfo.description || !itemInfo.link || !itemInfo.image) {
+            alert('please fill all required fields');
+            return false;
+        }
+
+        $.ajax({
+            url: "@Url.Content("~/CreateItem")",
+            type: 'post',
+            data: itemInfo,
+            success: (resp) => {
+                microsoftTeams.tasks.submitTask({success: true}, '207c4b35-3360-46ac-b5c2-af4ce2238898');
+            },
+            error: (res) => {
+                alert('error occurs');
+            }
+        });
+    }
+</script>
+<div id="itemInfo">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" class="form-control" type="text" placeholder="Please input name" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input name="description" class="form-control" type="text" placeholder="Please input description" />
+    </div>
+    <div class="form-group">
+        <label for="link">Link</label>
+        <input name="link" class="form-control" type="text" placeholder="Please input purchase link" />
+    </div>
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input name="image" class="form-control" type="text" placeholder="Please input image link" />
+    </div>
+    <input name="createdUser" type="hidden" />
+    <button onclick="submitForm()" class="button-primary">Submit</button>
+    <br />
+    <button onclick="goToChat()" class="button-primary">Chat</button>
+</div>
+<script type="text/javascript"> 
+    microsoftTeams.getContext(function (context) {
+        if (context && context.userPrincipalName) {
+            $("input[name=createdUser]").val(context.userPrincipalName);
+        }
+    });
+
+    function goToChat() {
+        // Just close task module without parameter;
+        microsoftTeams.tasks.submitTask();
+
+        // Go to conversation;
+        var chatLink = "https://teams.microsoft.com/l/chat/0/0?users=yy@mstech2018.onmicrosoft.com&topicName=topicname&message=initMessage";
+        microsoftTeams.executeDeepLink(chatLink);
+    }
+</script>

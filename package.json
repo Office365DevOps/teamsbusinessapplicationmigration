@@ -1,0 +1,22 @@
+{
+  "name": "msteams-samples-hello-world-csharp",
+  "version": "1.0.0",
+  "description": "---\r topic: sample\r products:\r - Office 365\r languages:\r - CSS\r extensions:\r   contentType: samples\r   createdDate: 10/16/2017 10:02:21 PM\r ---",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfficeDev/msteams-samples-hello-world-csharp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OfficeDev/msteams-samples-hello-world-csharp/issues"
+  },
+  "homepage": "https://github.com/OfficeDev/msteams-samples-hello-world-csharp#readme"
+}

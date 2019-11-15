@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Update Item";
+}
+<h2>@ViewBag.Result</h2>
+<script type="text/javascript">
+    function submitForm() {
+        var itemInfo = {
+            name: $("input[name=name]").val(),
+            description: $("input[name=description]").val(),
+            link: $("input[name=link]").val(),
+            image: $("input[name=image]").val(),
+            updatedUser: $("input[name=updatedUser]").val(),
+        }
+        if (!itemInfo.name || !itemInfo.description || !itemInfo.link || !itemInfo.image) {
+            alert('please fill all required fields');
+            return false;
+        }
+
+        let updateUrl = '@string.Format("{0}/{1}", Url.Content("~/UpdateItem"), Model?.Id)';
+        $.ajax({
+            url: updateUrl,
+            type: 'post',
+            data: itemInfo,
+            success: (resp) => {
+                // close task module without parameter;
+                microsoftTeams.tasks.submitTask();
+            },
+            error: (res) => {
+                alert('error occurs');
+            }
+        });
+    }
+</script>
+<div id="itemForm">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" class="form-control" type="text" placeholder="Please input name" value="@Model.Name" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input name="description" class="form-control" type="text" placeholder="Please input description" value="@Model.Description" />
+    </div>
+    <div class="form-group">
+        <label for="link">Link</label>
+        <input name="link" class="form-control" type="text" placeholder="Please input purchase link" value="@Model.Link" />
+    </div>
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input name="image" class="form-control" type="text" placeholder="Please input image link" value="@Model.Image" />
+    </div>
+    <input name="updatedUser" type="hidden" />
+    <button onclick="submitForm()" class="button-primary">Submit</button>
+</div>
+<script type="text/javascript">
+    microsoftTeams.getContext(function (context) {
+        if (context && context.userPrincipalName) {
+            $("input[name=updatedUser]").val(context.userPrincipalName);
+        }
+    });
+</script>
