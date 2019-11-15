@@ -21,7 +21,7 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
         }
 
         [Route("CreateItem")]
-        public ActionResult CreateItem()
+        public ActionResult CreateItem(Category category)
         {
             ViewBag.Result = "Create Item";
             if (Request.HttpMethod.ToUpperInvariant() == "POST")
@@ -34,11 +34,12 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
                     Link = Request.Form["link"],
                     Image = string.IsNullOrEmpty(Request.Form["image"]) ? "http://lorempixel.com/800/800?rand=" + DateTime.Now.Ticks.ToString() : Request.Form["image"],
                     CreatedUser = Request.Form["createdUser"],
+                    Category = (Category)Enum.Parse(typeof(Category), Request.Form["category"], true),
                     CreatedTime = DateTime.Now,
                 };
                 ItemDB.AddItem(item);
             }
-
+            ViewBag.Category = category;
             return View(ViewBag);
         }
 
@@ -84,7 +85,7 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
             {
                 result = ItemDB.Items.Where(i => i.Category == category).ToList();
             }
-
+            ViewBag.Category = category;
             return View(result);
         }
 
@@ -97,7 +98,7 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
                 var tokenCookie = new HttpCookie("token", token);
                 tokenCookie.Expires.AddDays(7);
                 HttpContext.Response.Cookies.Add(tokenCookie);
-                return RedirectToAction("ListItem");
+                return RedirectToAction("ListItem", new { category = Category.All });
             }
             return View();
         }
