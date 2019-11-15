@@ -12,6 +12,7 @@
             link: $("input[name=link]").val(),
             image: $("input[name=image]").val(),
             createdUser: $("input[name=createdUser]").val(),
+            category: $("input[name=category]").val(),
         }
         if (!itemInfo.name || !itemInfo.description || !itemInfo.link || !itemInfo.image) {
             alert('please fill all required fields');
@@ -49,9 +50,10 @@
         <input name="image" class="form-control" type="text" placeholder="Please input image link" />
     </div>
     <input name="createdUser" type="hidden" value="@ViewBag.CreatedUser" />
+    <input name="category" type="hidden" value="@ViewBag.Category" />
     <button onclick="submitForm()" class="button-primary">Submit</button>
     <br />
-    <button onclick="goToChat()" class="button-primary">Chat</button>
+    @*<button onclick="goToChat()" class="button-primary">Chat</button>*@
 </div>
 <script type="text/javascript">
     function goToChat() {
