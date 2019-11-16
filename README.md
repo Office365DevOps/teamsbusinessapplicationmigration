@@ -1,5 +1,7 @@
 # 本地开发和调试Business.Application.Migration项目
 
+## 关于代码下载和分支切换，及bot命令的定义，可以切换到after分支查看详情
+
 ## 准备条件
 
 安装以下软件.
