@@ -8,16 +8,19 @@
 2. [teams客户端](https://products.office.com/en-US/microsoft-teams/group-chat-software)或者使用[web版本](https://teams.microsoft.com/)
 3. [ngrok反向代理工具](https://ngrok.com/)
 
-### 下载代码  
+### 下载代码
 
-方法1：
+#### 方法1
+
 ![download](images/download_code.png)
-方法2：  
-    1. 需要安装git  
-    2. 复制代码仓库地址
-    ![download](images/clone_code_copy_url.png)
-    3. 选择自己的文件夹(我这里的文件夹名称为github)，输入以下命令，回车，进行克隆
-    ![download](images/clone_code_clone.png)
+
+### 方法2  
+
+1. 需要安装git  
+2. 复制代码仓库地址
+![download](images/clone_code_copy_url.png)
+3. 选择自己的文件夹(我这里的文件夹名称为github)，输入以下命令，回车，进行克隆
+![download](images/clone_code_clone.png)
 
 ### 如何切换before和after分支
 
