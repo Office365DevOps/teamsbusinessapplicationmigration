@@ -76,7 +76,12 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
                 if (Request.HttpMethod == "POST")
                 {
                     var keyword = Request.Form["searchBox"];
-                    result = ItemDB.SearchItems(keyword);
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        result = ItemDB.SearchItems(keyword);
+                    }
+                    else
+                        result = ItemDB.SearchItems(keyword);
                 }
                 else
                     result = ItemDB.Items;
