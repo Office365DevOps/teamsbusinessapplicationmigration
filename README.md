@@ -1,5 +1,3 @@
-[![Build Status](https://dev.azure.com/pp0197/default/_apis/build/status/paul-cheung.msteams-samples-task-module-csharp?branchName=master)](https://dev.azure.com/pp0197/default/_build/latest?definitionId=1&branchName=master)
-
 # Developing and debugging a Task Module locally
 
 ## Prerequisites
@@ -13,10 +11,10 @@ The following tools should be installed.
 ## Steps
 
 - Make sure that the all required tools are installed.
-- Use visual studio to open solution `Microsoft.Teams.Samples.TaskModule.sln` and run it(default with port 3333).
+- Use visual studio to open solution `Business.Application.Migration.sln` and run it(default with port 3333).
 - Open ngrok terminal and run `ngrok.exe http 3333 -host-header="localhost:3333"`, copy https host
 ![ngrok](images/ngrok_running.png)
-- Update web.config file accordingly
+- Update web.config file accordingly(we can keep the original values and use it)
 ![web.config](images/vs_config.png)
 - Use App Studio to configure tab, bot, message extension.
 ![app studio](images/config_tab_host.png)
