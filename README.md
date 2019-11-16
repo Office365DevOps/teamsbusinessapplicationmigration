@@ -2,11 +2,32 @@
 
 ## 准备条件
 
-安装以下软件.
+### 安装以下软件
 
 1. [visual studio](https://visualstudio.microsoft.com/downloads)
 2. [teams客户端](https://products.office.com/en-US/microsoft-teams/group-chat-software)或者使用[web版本](https://teams.microsoft.com/)
 3. [ngrok反向代理工具](https://ngrok.com/)
+
+### 下载代码  
+
+方法1：
+![download](images/download_code.png)
+方法2：  
+    1. 需要安装git  
+    2. 复制代码仓库地址
+    ![download](images/clone_code_copy_url.png)
+    3. 选择自己的文件夹(我这里的文件夹名称为github)，输入以下命令，回车，进行克隆
+    ![download](images/clone_code_clone.png)
+
+### 如何切换before和after分支
+
+打开命令行，首先进入clone下来项目的目录，如下
+![ngrok](images/checkout_branch.png)
+
+1. 切换到before分支  
+`> git checkout before`
+2. 切换到after分支  
+`> git checkout after`
 
 ## 步骤
 
@@ -19,6 +40,10 @@
 ![app studio](images/config_tab_host.png)
 ![app studio](images/config_bot_host.png)
 ![app studio](images/config_msg_extension.png)
+- Message Extension中的command定义（机器人的命令）
+![app studio](images/msg_extension_addcmd1.png)
+![app studio](images/msg_extension_addcmd2.png)
+![app studio](images/msg_extension_addcmd3.png)
 - 通过App Studio安装Business Application Migration应用，选择安装的功能（可以单独安装Tab, Bot，或者一起装，在“设置”按钮的下来框里选择）
 ![app studio](images/install_app_studio1.png)
 ![app studio](images/install_app_studio2.png)
