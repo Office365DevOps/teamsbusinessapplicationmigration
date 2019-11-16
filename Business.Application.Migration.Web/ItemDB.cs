@@ -93,7 +93,10 @@ namespace Microsoft.Teams.Samples.TaskModule.Web
                     return TokenUserNameMap[guid];
                 }
             }
-            return string.Empty;
+
+            // As the IIS Express restart will erase the TokenUserNameMap with the existence of user's token cookie.
+            // In real case this will be stored in database, here just return a certain email for demostration purpose.
+            return "paul_cheung@msn.cn";
         }
     }
 

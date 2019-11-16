@@ -34,7 +34,7 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
                     Link = Request.Form["link"],
                     Image = string.IsNullOrEmpty(Request.Form["image"]) ? "http://lorempixel.com/800/800?rand=" + DateTime.Now.Ticks.ToString() : Request.Form["image"],
                     CreatedUser = Request.Form["createdUser"],
-                    Category = (Category)Enum.Parse(typeof(Category), Request.Form["createdUser"], true),
+                    Category = (Category)Enum.Parse(typeof(Category), Request.Form["category"], true),
                     CreatedTime = DateTime.Now,
                 };
                 ItemDB.AddItem(item);
@@ -86,7 +86,12 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
                 if (Request.HttpMethod == "POST")
                 {
                     var keyword = Request.Form["searchBox"];
-                    result = ItemDB.SearchItems(keyword);
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        result = ItemDB.SearchItems(keyword);
+                    }
+                    else
+                        result = ItemDB.Items.Where(i => i.Category == Category.All).ToList();
                 }
                 else
                     result = ItemDB.Items;
