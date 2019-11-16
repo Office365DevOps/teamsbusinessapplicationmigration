@@ -70,27 +70,42 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Controllers
                 return RedirectToAction("Login");
             }
 
+            var keyword = string.Empty;
             List<ItemInfo> result;
             if (category == Category.All)
             {
                 if (Request.HttpMethod == "POST")
                 {
-                    var keyword = Request.Form["searchBox"];
+                    keyword = Request.Form["searchBox"];
                     if (!string.IsNullOrEmpty(keyword))
                     {
                         result = ItemDB.SearchItems(keyword);
                     }
                     else
-                        result = ItemDB.SearchItems(keyword);
+                        result = ItemDB.Items;
                 }
                 else
                     result = ItemDB.Items;
             }
             else
             {
-                result = ItemDB.Items.Where(i => i.Category == category).ToList();
+                if (Request.HttpMethod == "POST")
+                {
+                    keyword = Request.Form["searchBox"];
+                    if (!string.IsNullOrEmpty(keyword))
+                    {
+                        result = ItemDB.SearchItems(keyword);
+                    }
+                    else
+                        result = ItemDB.Items;
+
+                    result = result.Where(i => i.Category == category).ToList();
+                }
+                else
+                    result = ItemDB.Items.Where(i => i.Category == category).ToList();
             }
             ViewBag.Category = category;
+            ViewBag.Keyword = keyword;
             return View(result);
         }
 
