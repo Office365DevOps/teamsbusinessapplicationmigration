@@ -25,5 +25,5 @@
 ![get token](images/graph/gear-choose-file.png)
 
 
-### Permissions configured for this application
+## 附：调用以上接口需要针对应用添加的权限
 ![get token](images/graph/added-permissions.png)
