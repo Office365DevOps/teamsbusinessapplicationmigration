@@ -40,3 +40,7 @@
 ![task module update](images/task_module_update.png)
 
 > 注: 如果自己想注册Bot，请点击[这里](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/bots/bots-create)，或者直接在App Studio里的Bot功能模块创建。
+
+
+## Graph
+[graph](Graph.md)
