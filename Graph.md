@@ -23,3 +23,7 @@
 ![get token](images/graph/gear.png)
 ![get token](images/graph/gear-import-btn.png)
 ![get token](images/graph/gear-choose-file.png)
+
+
+### Permissions configured for this application
+![get token](images/graph/added-permissions.png)
