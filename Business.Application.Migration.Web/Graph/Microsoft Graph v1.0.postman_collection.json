@@ -1,0 +1,740 @@
+{
+	"info": {
+		"_postman_id": "f59fe174-7344-433f-b199-2e9a329a39a0",
+		"name": "Microsoft Graph - Partner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User-OneDrive",
+			"item": [
+				{
+					"name": "token request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e089f51e-f11e-4f81-8cf2-b801f9611d5d",
+								"exec": [
+									"let json = pm.response.json();",
+									"pm.environment.set(\"token\", json.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Host",
+								"value": " login.microsoftonline.com",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "52e2ca2d-6ecf-4328-adec-c38469a31a24",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "https://graph.microsoft.com/.default",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "?[-pANFYaLESC9O/brz9b0xZyyMSB4N0",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://login.microsoftonline.com/aece5000-341d-493a-841d-f67e417f1447/oauth2/v2.0/token",
+							"protocol": "https",
+							"host": [
+								"login",
+								"microsoftonline",
+								"com"
+							],
+							"path": [
+								"aece5000-341d-493a-841d-f67e417f1447",
+								"oauth2",
+								"v2.0",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									"let json = pm.response.json();",
+									"pm.environment.set(\"userId\", json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "52e2ca2d-6ecf-4328-adec-c38469a31a24",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "https://graph.microsoft.com/.default",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "?[-pANFYaLESC9O/brz9b0xZyyMSB4N0",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/users/paul@greatchinaoffice365.onmicrosoft.com",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"users",
+								"paul@greatchinaoffice365.onmicrosoft.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-drive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									"let json = pm.response.json();",
+									"pm.environment.set(\"driveId\", json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "52e2ca2d-6ecf-4328-adec-c38469a31a24",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "https://graph.microsoft.com/.default",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "?[-pANFYaLESC9O/brz9b0xZyyMSB4N0",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/users/{{userId}}/drive",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"users",
+								"{{userId}}",
+								"drive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-drive-files",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "52e2ca2d-6ecf-4328-adec-c38469a31a24",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "https://graph.microsoft.com/.default",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "?[-pANFYaLESC9O/brz9b0xZyyMSB4N0",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/drives/{{driveId}}/root/children",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"drives",
+								"{{driveId}}",
+								"root",
+								"children"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ba261c95-4637-4deb-8b2c-a72db67a78e6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d8205bb-361b-40b5-a5ba-94c448c7907d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Team-OneDrive",
+			"item": [
+				{
+					"name": "group-list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/groups?$orderby=displayName",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"groups"
+							],
+							"query": [
+								{
+									"key": "$orderby",
+									"value": "displayName"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "group-get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/groups/a5bccc21-c68f-4937-be88-e539b293ff02",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"groups",
+								"a5bccc21-c68f-4937-be88-e539b293ff02"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "group-drive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									"let json = pm.response.json();",
+									"pm.environment.set(\"groupDriveId\", json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/groups/a5bccc21-c68f-4937-be88-e539b293ff02/drive",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"groups",
+								"a5bccc21-c68f-4937-be88-e539b293ff02",
+								"drive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "group-drive-files",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/drives/{{groupDriveId}}/root/children",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"drives",
+								"{{groupDriveId}}",
+								"root",
+								"children"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "group-drive-folder-files",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/drives/{{groupDriveId}}/items/01KWIH6F4ACBTEGCRVEJAJOGXQJQLV2NOZ/children",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"drives",
+								"{{groupDriveId}}",
+								"items",
+								"01KWIH6F4ACBTEGCRVEJAJOGXQJQLV2NOZ",
+								"children"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch-drive-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc0e50f-dbcc-4d3b-8028-40e7d7221ae9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Host",
+								"type": "text",
+								"value": " login.microsoftonline.com"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"englishwords.txt\"\n}"
+						},
+						"url": {
+							"raw": "https://graph.microsoft.com/v1.0/drives/{{groupDriveId}}/items/01KWIH6F637GVS5QO6VJAZBO4V4G5QFG2N",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"v1.0",
+								"drives",
+								"{{groupDriveId}}",
+								"items",
+								"01KWIH6F637GVS5QO6VJAZBO4V4G5QFG2N"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b4efff39-bbeb-4193-940c-4100702bd2f2",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b698258-2a2a-43ef-bad9-3dfcfad6138e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
