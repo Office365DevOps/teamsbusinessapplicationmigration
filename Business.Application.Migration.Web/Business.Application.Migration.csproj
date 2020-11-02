@@ -219,6 +219,8 @@
     <Content Include="Views\Home\ListItem.cshtml" />
     <Content Include="Views\Home\UpdateItem.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <None Include="Properties\PublishProfiles\BusinessApplicationMigration2020 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\BusinessApplicationMigration20201102125306 - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
